@@ -32,10 +32,10 @@ public:
     bool should_close = false;
 private:
 private:
-    GLFWwindow *window = nullptr;
-    inline static bool glew_initialized = false;
-    inline static bool glfw_initialized = false;
-    inline static unsigned int living_windows = 0;
+    GLFWwindow *m_window = nullptr;
+    inline static bool s_glew_initialized = false;
+    inline static bool s_glfw_initialized = false;
+    inline static unsigned int s_living_windows = 0;
 };
 
 }
