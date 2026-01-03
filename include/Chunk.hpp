@@ -17,10 +17,6 @@
 
 namespace voxen {
 
-enum VoxelId {
-    AIR = 0,
-};
-
 template <typename T>
 struct PositionedLocalVoxel {
     std::uint64_t x;
@@ -29,6 +25,7 @@ struct PositionedLocalVoxel {
     T value;
 };
 
+/// Make sure the block type is an integer and 0 is reserved for air
 template<std::uint64_t width, std::uint64_t height, std::uint64_t depth, typename T>
 class Chunk {
 public:

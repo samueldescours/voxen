@@ -17,7 +17,7 @@ using namespace voxen;
 
 template<std::uint64_t width, std::uint64_t height, std::uint64_t depth, typename T>
 Chunk<width, height, depth, T>::Chunk(std::vector<PositionedLocalVoxel<T>> voxels) {
-    m_chunk.fill(VoxelId::AIR);
+    m_chunk.fill(0);
     for (PositionedLocalVoxel<T> voxel : voxels) {
         if (voxel.x + width * (voxel.y + voxel.z * height) > width * height * depth - 1) {
             std::printf("Chunk does not allow for a block at position : %llu, %llu, %llu\n", voxel.x, voxel.y, voxel.z);
@@ -54,5 +54,5 @@ void Chunk<width, height, depth, T>::RemoveVoxelAt(std::uint64_t x, std::uint64_
             std::printf("Tried to remove a block out of bounds at position : %llu, %llu, %llu\n", x, y, z);
             return;
     }
-    m_chunk[x + width * (y + height * z)] = VoxelId::AIR;
+    m_chunk[x + width * (y + height * z)] = 0;
 }
