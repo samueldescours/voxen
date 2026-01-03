@@ -17,7 +17,7 @@ using namespace voxen;
 
 template<std::uint64_t width, std::uint64_t height, std::uint64_t depth, typename T>
 Chunk<width, height, depth, T>::Chunk(std::vector<PositionedLocalVoxel<T>> voxels) {
-    m_chunk.fill(0);
+    m_chunk.fill(VoxelId::AIR);
     for (PositionedLocalVoxel<T> voxel : voxels) {
         if (voxel.x + width * (voxel.y + voxel.z * height) > width * height * depth - 1) {
             std::printf("Chunk does not allow for a block at position : %llu, %llu, %llu\n", voxel.x, voxel.y, voxel.z);
@@ -33,7 +33,26 @@ Chunk<width, height, depth, T>::~Chunk() {
 }
 
 template<std::uint64_t width, std::uint64_t height, std::uint64_t depth, typename T>
-void Chunk<width, height, depth, T>::SetGlobalPosition(std::uint64_t x, std::uint64_t y) {
+void Chunk<width, height, depth, T>::SetGlobalPosition(std::uint64_t x, std::uint64_t y, std::uint64_t z) {
     m_global_x = x;
     m_global_y = y;
+    m_global_z = z;
+}
+
+template<std::uint64_t width, std::uint64_t height, std::uint64_t depth, typename T>
+void Chunk<width, height, depth, T>::AddVoxel(PositionedLocalVoxel<T> voxel) {
+    if (voxel.x + width * (voxel.y + voxel.z * height) > width * height * depth - 1) {
+            std::printf("Chunk does not allow for a block at position : %llu, %llu, %llu\n", voxel.x, voxel.y, voxel.z);
+            return;
+    }
+    m_chunk[voxel.x + width * (voxel.y + height * voxel.z)] = voxel.value;
+}
+
+template<std::uint64_t width, std::uint64_t height, std::uint64_t depth, typename T>
+void Chunk<width, height, depth, T>::RemoveVoxelAt(std::uint64_t x, std::uint64_t y, std::uint64_t z) {
+    if (x + width * (y + z * height) > width * height * depth - 1) {
+            std::printf("Tried to remove a block out of bounds at position : %llu, %llu, %llu\n", x, y, z);
+            return;
+    }
+    m_chunk[x + width * (y + height * z)] = VoxelId::AIR;
 }

@@ -17,6 +17,10 @@
 
 namespace voxen {
 
+enum VoxelId {
+    AIR = 0,
+};
+
 template <typename T>
 struct PositionedLocalVoxel {
     std::uint64_t x;
@@ -33,15 +37,18 @@ public:
     
     /// /!\ WARNING : Sets the postion of the corner away from the center of the
     /// block at local coordinates 0, 0, 0
-    void SetGlobalPosition(std::uint64_t x, std::uint64_t y);
+    void SetGlobalPosition(std::uint64_t x, std::uint64_t y, std::uint64_t z);
     /// /!\ WARNING : NOT IMPLEMENTED
     void Draw();
+    void AddVoxel(PositionedLocalVoxel<T> voxel);
+    void RemoveVoxelAt(std::uint64_t x, std::uint64_t y, std::uint64_t z);
 public:
 private:
 private:
     std::array<T, width * height * depth> m_chunk;
     std::uint64_t m_global_x = 0;
     std::uint64_t m_global_y = 0;
+    std::uint64_t m_global_z = 0;
 };
 
 }
