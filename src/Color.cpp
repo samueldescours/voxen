@@ -1,3 +1,14 @@
+/*
+ * Copyright (C) 2026 Samuel DESCOURS
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This file is part of: https://github.com/samueldescours/voxen
+ */
+
 #include "Color.hpp"
 #include <array>
 
@@ -8,13 +19,6 @@ Color::Color(std::uint8_t r, std::uint8_t g, std::uint8_t b, std::uint8_t a) {
     m_g = g;
     m_b = b;
     m_a = a;
-}
-
-Color::Color(float r, float g, float b, float a) {
-    m_r = (std::uint8_t)(r * 255);
-    m_g = (std::uint8_t)(g * 255);
-    m_b = (std::uint8_t)(b * 255);
-    m_a = (std::uint8_t)(a * 255);
 }
 
 std::array<std::uint8_t, 4> Color::GetInt() {
