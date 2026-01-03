@@ -1,0 +1,8 @@
+-Iinclude
+-Ilib
+-Llib
+-lglfw
+-lGLEW
+-lGL
+-Wall
+-Wextra
