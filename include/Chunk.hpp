@@ -30,8 +30,18 @@ class Chunk {
 public:
     Chunk(std::vector<PositionedLocalVoxel<T>> voxels);
     ~Chunk();
+    
+    /// /!\ WARNING : Sets the postion of the corner away from the center of the
+    /// block at local coordinates 0, 0, 0
+    void SetGlobalPosition(std::uint64_t x, std::uint64_t y);
+    /// /!\ WARNING : NOT IMPLEMENTED
+    void Draw();
+public:
+private:
 private:
     std::array<T, width * height * depth> m_chunk;
+    std::uint64_t m_global_x = 0;
+    std::uint64_t m_global_y = 0;
 };
 
 }
